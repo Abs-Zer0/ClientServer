@@ -1,1 +1,7 @@
-description = 'JavaClient'
+    group = 'my.fail.client'
+
+mainClassName = 'my.fail.client.Main'
+
+repositories {
+    jcenter()
+}

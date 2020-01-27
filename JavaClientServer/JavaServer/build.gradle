@@ -1,1 +1,7 @@
-description = 'JavaServer'
+    group = 'my.fail.server'
+
+mainClassName = 'my.fail.server.Main'
+
+repositories {
+    jcenter()
+}
