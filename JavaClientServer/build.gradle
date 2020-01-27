@@ -1,0 +1,13 @@
+allprojects {
+
+    group = 'my.fail'
+
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+}

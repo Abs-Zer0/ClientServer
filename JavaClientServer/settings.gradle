@@ -1,0 +1,5 @@
+rootProject.name = 'JavaClientServer'
+
+include ':JavaClient'
+include ':JavaServer'
+
