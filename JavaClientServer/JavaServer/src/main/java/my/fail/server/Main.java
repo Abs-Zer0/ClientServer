@@ -7,7 +7,7 @@ package my.fail.server;
 
 /**
  *
- * @author Абс0лютный Н0ль
+ * @author
  */
 public class Main {
 

@@ -1,7 +1,13 @@
-    group = 'my.fail.client'
+group = 'my.fail.client'
+
+apply plugin: 'application'
 
 mainClassName = 'my.fail.client.Main'
 
-repositories {
-    jcenter()
+dependencies {
+    implementation project(":BufferConverter")
+}
+
+jar {
+    manifest.attributes("Main-Class": mainClassName);   
 }

@@ -5,13 +5,18 @@
  */
 package my.fail.client;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.*;
-import java.util.stream.Stream;
-import jdk.jfr.Unsigned;
+
+import my.fail.BufferConverter;
 
 /**
  *
- * @author Абс0лютный Н0ль
+ * @author пїЅпїЅпїЅ0пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ0пїЅпїЅ
  */
 public class Main {
 
@@ -20,18 +25,57 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String regex = "(?<cmd>c(onnect)?)( (?<ip>\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(:(?<port>\\d{1,5}))?)?$";
-        Pattern p = Pattern.compile(regex);
-        String text = "connect 127.0.0.1";
-        Matcher m = p.matcher(text);
+        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+        String buf = "";
+        ClientManager client = new ClientManager();
 
-        System.out.println(m.matches());
-        System.out.println(m.group("cmd"));
-        System.out.println(m.group("ip"));
-        System.out.println(m.group("port"));
+        String exit = "e(xit)?$|q(uit)?$";
+        String stop = "s(top)?$";
+        Pattern connect = Pattern.compile("(?<cmd>c(onnect)?)( (?<ip>\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(:(?<port>\\d{1,5}))?)?$");
 
-        byte[] arr = {0, 0, 0, 1};
-        Integer a = 127;
+        /*do {
+            try {
+                if (console.ready()) {
+                    buf = console.readLine();
+
+                    if (Pattern.matches(exit, buf)) {
+                        client.close();
+                        console.close();
+
+                        break;
+                    } else if (Pattern.matches(stop, buf)) {
+                        client.Stop();
+                    } else if (Pattern.matches(connect.pattern(), buf)) {
+                        Matcher match = connect.matcher(buf);
+
+                        String ip = match.group("ip");
+                        String port = match.group("port");
+
+                        client.Connect(ip, port);
+                    } else {
+                        client.StartSession(buf);
+                    }
+                }
+            } catch (IOException ex) {
+                System.out.println(ex.getLocalizedMessage());
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } while (true);*/
+        try {
+            client.close();
+            console.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int a = 16777216+65536+256+1;
+        System.out.println(a);
+        byte[] arr = BufferConverter.IntToBuff(a);
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print((int) arr[i] + " ");
+        }
+        System.out.println();
+        System.out.println(BufferConverter.BuffToInt(arr));
     }
-
 }
