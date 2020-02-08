@@ -2,4 +2,4 @@ rootProject.name = 'JavaClientServer'
 
 include ':JavaClient'
 include ':JavaServer'
-include ':BufferConverter'
+include ':Converter'

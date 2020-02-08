@@ -1,3 +1,5 @@
+group = 'my.fail'
+
 apply plugin: 'maven'
 
 repositories {

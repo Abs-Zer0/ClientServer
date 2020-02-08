@@ -5,7 +5,7 @@ apply plugin: 'application'
 mainClassName = 'my.fail.server.Main'
 
 dependencies {
-    compile project(":BufferConverter")
+    compile project(":Converter")
 }
 
 jar {
