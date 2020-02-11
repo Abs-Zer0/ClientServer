@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -73,6 +74,8 @@ public class FXClientWindow extends Application {
         this.btns.setSpacing(20.0);
         this.btns.setPadding(new Insets(10.0));
 
+        this.inputView.setOnScroll((ScrollEvent eh) -> inputScroll());
+        this.outputView.setOnScroll((ScrollEvent eh) -> outputScroll());
         this.msg.setOnAction((ActionEvent eh) -> this.startSession());
         this.stopBtn.setOnAction((ActionEvent eh) -> this.stopClient());
         this.connectBtn.setOnAction((ActionEvent t) -> this.connectClient());
@@ -114,9 +117,13 @@ public class FXClientWindow extends Application {
         String text = this.msg.getText();
         this.msg.clear();
 
-        this.inputView.getItems().add(text);
-        String result = this.client.StartSession(text);
-        this.outputView.getItems().add(result);
+        try {
+            String result = this.client.StartSession(text);
+            this.inputView.getItems().add(text);
+            this.outputView.getItems().add(result);
+        } catch (IOException ex) {
+            DialogWindow.ErrorDialog("Error", ex.getMessage(), null);
+        }
     }
 
     private void connectClient() {
@@ -141,6 +148,14 @@ public class FXClientWindow extends Application {
 
             DialogWindow.ErrorDialog("Error", "Client can't stop", null);
         }
+    }
+
+    private void inputScroll() {
+        System.out.println("scroll input");
+    }
+
+    private void outputScroll() {
+        System.out.println("scroll output");
     }
 
     private VBox root;

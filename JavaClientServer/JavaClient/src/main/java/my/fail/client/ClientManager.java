@@ -9,9 +9,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import my.fail.BufferConverter;
 
 /**
@@ -28,6 +25,9 @@ public class ClientManager implements Closeable {
     }
 
     public void Stop() throws IOException {
+        this.StartSession("exit");
+        this.socket.getInputStream().close();
+        this.socket.getOutputStream().close();
         this.socket.close();
     }
 
@@ -43,25 +43,23 @@ public class ClientManager implements Closeable {
         this.socket.setSoTimeout(timeout);
     }
 
-    public String StartSession(String text) {
-        if (!this.IsClosed()) {
-            return "Stopped";
+    public String StartSession(String text) throws IOException {
+        if (text == null) {
+            throw new NullPointerException();
         }
 
-        if (!this.IsConnected()) {
-            return "Disconnected";
+        if (text.isEmpty()) {
+            throw new IOException("String is empty");
         }
 
-        try {
-            this.SendAll(text);
-            String result = this.ReceiveAll();
-
-            return result;
-        } catch (IOException ex) {
-            Logger.getLogger(ClientManager.class.getName()).log(Level.SEVERE, null, ex);
-
-            return ex.getMessage();
+        this.SendAll(text);
+        this.socket.getOutputStream().flush();
+        String result = null;
+        if (!text.equalsIgnoreCase("exit") && !text.equalsIgnoreCase("quit")) {
+            result = this.ReceiveAll();
         }
+
+        return result;
     }
 
     @Override
