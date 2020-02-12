@@ -43,7 +43,7 @@ public class Main {
                     console.close();
                     break;
                 } else if (buf.toLowerCase().matches("s(tart)?$")) {
-                    server.Start(null);
+                    server.Start("4004");
                 } else if (buf.toLowerCase().matches("stop")) {
                     server.Stop();
                 } else if (buf.toLowerCase().matches("p(rint)?$")) {

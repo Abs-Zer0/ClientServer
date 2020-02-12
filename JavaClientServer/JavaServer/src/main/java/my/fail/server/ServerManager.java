@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Абс0лютный Н0ль
+ * @author пїЅпїЅпїЅ0пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ0пїЅпїЅ
  */
 public class ServerManager implements Closeable {
 
@@ -97,12 +97,13 @@ public class ServerManager implements Closeable {
                 Socket socket = this.listener.accept();
                 ClientManager client = new ClientManager(socket);
                 client.start();
+                System.out.println("Client(" + client.Address() + ") connected");
 
                 synchronized (locker) {
                     clients.add(client);
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ServerManager.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ServerManager.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             this.RemoveUnused();

@@ -26,7 +26,7 @@ import javafx.stage.WindowEvent;
 
 /**
  *
- * @author Абс0лютный Н0ль
+ * @author пїЅпїЅпїЅ0пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ0пїЅпїЅ
  */
 public class FXClientWindow extends Application {
 
@@ -146,7 +146,7 @@ public class FXClientWindow extends Application {
         } catch (IOException ex) {
             Logger.getLogger(FXClientWindow.class.getName()).log(Level.SEVERE, null, ex);
 
-            DialogWindow.ErrorDialog("Error", "Client can't stop", null);
+            DialogWindow.ErrorDialog("Error", ex.getMessage(), null);
         }
     }
 

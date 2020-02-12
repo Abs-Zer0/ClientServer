@@ -15,7 +15,7 @@ import my.fail.BufferConverter;
 
 /**
  *
- * @author Абс0лютный Н0ль
+ * @author пїЅпїЅпїЅ0пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ0пїЅпїЅ
  */
 public class ClientManager extends Thread {
 
@@ -51,7 +51,7 @@ public class ClientManager extends Thread {
                     this.working = false;
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ClientManager.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ClientManager.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
