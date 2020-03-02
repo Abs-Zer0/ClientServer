@@ -128,7 +128,7 @@ public class FXClientWindow extends Application {
 
     private void connectClient() {
         try {
-            this.client.Connect("127.0.0.1", "4004");
+            this.client.Connect(DialogWindow.InputDialog("Input host/ip"), "4004");
 
             DialogWindow.InfoDialog("Successful", "Connected to server", null);
         } catch (IOException ex) {

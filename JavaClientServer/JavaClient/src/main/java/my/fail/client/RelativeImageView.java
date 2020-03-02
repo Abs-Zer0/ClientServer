@@ -21,6 +21,7 @@ public class RelativeImageView extends ImageView {
 
     public RelativeImageView(String path) throws FileNotFoundException {
         super(new Image(new FileInputStream(new File(path))));
+        //super(new Image(RelativeImageView.class.getClass().getResource("../../../Enet.png").getPath()));
         this.relative = this.getImage().getWidth() / this.getImage().getHeight();
     }
 

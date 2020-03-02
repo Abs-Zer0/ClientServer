@@ -36,7 +36,7 @@ public class ClientManager implements Closeable {
             this.socket = new Socket();
         }
 
-        String correct_ip = ip == null ? "127.0.0.1" : ip;
+        String correct_ip = ip == null || ip.isEmpty() ? "127.0.0.1" : ip;
         short correct_port = port == null ? 0 : Short.valueOf(port);
 
         this.socket.connect(new InetSocketAddress(correct_ip, correct_port), timeout);
